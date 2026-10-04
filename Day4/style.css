@@ -1,0 +1,71 @@
+:root {
+  --bg-1: #0f2238;
+  --bg-2: #17324d;
+  --card: rgba(255, 255, 255, 0.06);
+  --ink: #f2f6fa;
+  --muted: #9db4c9;
+  --accent: #f0a91c;
+  --line: rgba(255, 255, 255, 0.14);
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-head: "Sora", "Inter", system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.5rem; padding: 1.5rem;
+  background: linear-gradient(160deg, var(--bg-1), var(--bg-2));
+  color: var(--ink);
+  font-family: var(--font-body);
+}
+
+.clock-card {
+  width: min(720px, 100%);
+  padding: clamp(1.75rem, 5vw, 3.5rem) clamp(1rem, 4vw, 3rem);
+  text-align: center;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 20px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.eyebrow {
+  margin: 0 0 1.25rem;
+  color: var(--accent);
+  font-size: 0.85rem; font-weight: 600;
+  letter-spacing: 0.18em; text-transform: uppercase;
+}
+
+.clock {
+  display: flex; justify-content: center; align-items: baseline;
+  gap: clamp(0.15rem, 1vw, 0.5rem);
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: clamp(2.6rem, 12vw, 6rem);
+  line-height: 1.1;
+  font-variant-numeric: tabular-nums;   /* stops digits shifting width every second */
+}
+.digit { min-width: 2ch; text-align: center; }
+.colon { color: var(--accent); animation: blink 1s steps(1) infinite; }
+.period { margin-left: 0.5rem; font-size: 0.28em; color: var(--muted); }
+
+.date { margin: 1rem 0 1.75rem; color: var(--muted); font-size: clamp(1rem, 3vw, 1.2rem); }
+
+.toggle {
+  padding: 0.65rem 1.4rem;
+  font: 500 0.95rem var(--font-body);
+  color: var(--ink); background: transparent;
+  border: 1px solid var(--accent); border-radius: 999px;
+  cursor: pointer; transition: background 0.2s, color 0.2s;
+}
+.toggle:hover { background: var(--accent); color: #1b2430; }
+.toggle:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+.foot p { margin: 0; color: var(--muted); font-size: 0.85rem; text-align: center; }
+
+@keyframes blink { 50% { opacity: 0.25; } }
+@media (prefers-reduced-motion: reduce) {
+  .colon { animation: none; }
+  .toggle { transition: none; }
+}
