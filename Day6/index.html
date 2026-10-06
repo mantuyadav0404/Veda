@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="BMI calculator that returns your Body Mass Index and WHO category from height and weight.">
+  <title>BMI Calculator | Mantu Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <header>
+      <p class="eyebrow">Veda Technology &middot; Task 6</p>
+      <h1>BMI Calculator</h1>
+      <p class="intro">Enter your height and weight to find your Body Mass Index and category.</p>
+    </header>
+
+    <form id="bmi-form" novalidate>
+      <div class="row">
+        <div class="field">
+          <label for="height">Height <span class="unit">cm</span></label>
+          <input id="height" name="height" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 170" aria-describedby="height-error">
+          <p id="height-error" class="error" role="alert"></p>
+        </div>
+        <div class="field">
+          <label for="weight">Weight <span class="unit">kg</span></label>
+          <input id="weight" name="weight" type="text" inputmode="decimal" autocomplete="off" placeholder="e.g. 65" aria-describedby="weight-error">
+          <p id="weight-error" class="error" role="alert"></p>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button type="submit" class="btn primary">Calculate BMI</button>
+        <button type="button" id="reset" class="btn secondary">Reset</button>
+      </div>
+    </form>
+
+    <section id="result" class="result" aria-live="polite" hidden>
+      <p class="result-label">Your BMI</p>
+      <p id="bmi-value" class="bmi-value">0.0</p>
+      <p id="bmi-category" class="category">Normal weight</p>
+
+      <div class="scale" aria-hidden="true">
+        <div class="bar">
+          <span class="seg under"></span><span class="seg normal"></span><span class="seg over"></span><span class="seg obese"></span>
+          <span id="marker" class="marker"></span>
+        </div>
+        <div class="ticks"><span>Underweight</span><span>Normal</span><span>Overweight</span><span>Obese</span></div>
+      </div>
+
+      <p id="advice" class="advice"></p>
+    </section>
+
+    <section class="table-wrap" aria-labelledby="who-h">
+      <h2 id="who-h">WHO BMI classification (adults)</h2>
+      <table>
+        <thead><tr><th scope="col">BMI</th><th scope="col">Category</th></tr></thead>
+        <tbody>
+          <tr><td>Below 18.5</td><td>Underweight</td></tr>
+          <tr><td>18.5 – 24.9</td><td>Normal weight</td></tr>
+          <tr><td>25.0 – 29.9</td><td>Overweight</td></tr>
+          <tr><td>30.0 and above</td><td>Obese</td></tr>
+        </tbody>
+      </table>
+      <p class="note">BMI is a screening tool, not a diagnosis. It does not measure body fat directly. For health advice, consult a doctor.</p>
+    </section>
+  </main>
+
+  <footer class="foot"><p>Built by Mantu Yadav &middot; Veda Technology Internship</p></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
