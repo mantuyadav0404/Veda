@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Basic calculator with addition, subtraction, multiplication, division and decimals.">
+  <title>Basic Calculator | Mantu Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="calculator" aria-label="Calculator">
+    <p class="eyebrow">Veda Technology &middot; Task 7</p>
+
+    <div class="display" role="status" aria-live="polite">
+      <div id="history" class="history" aria-hidden="true"></div>
+      <div id="current" class="current">0</div>
+    </div>
+
+    <div class="keys" id="keys">
+      <button class="key action" data-action="clear" aria-label="Clear all">C</button>
+      <button class="key action" data-action="delete" aria-label="Delete last digit">DEL</button>
+      <button class="key operator" data-operator="÷" aria-label="Divide">÷</button>
+      <button class="key operator" data-operator="×" aria-label="Multiply">×</button>
+
+      <button class="key" data-digit="7">7</button>
+      <button class="key" data-digit="8">8</button>
+      <button class="key" data-digit="9">9</button>
+      <button class="key operator" data-operator="-" aria-label="Subtract">−</button>
+
+      <button class="key" data-digit="4">4</button>
+      <button class="key" data-digit="5">5</button>
+      <button class="key" data-digit="6">6</button>
+      <button class="key operator" data-operator="+" aria-label="Add">+</button>
+
+      <button class="key" data-digit="1">1</button>
+      <button class="key" data-digit="2">2</button>
+      <button class="key" data-digit="3">3</button>
+      <button class="key equals" data-action="equals" aria-label="Equals">=</button>
+
+      <button class="key zero" data-digit="0">0</button>
+      <button class="key" data-action="decimal" aria-label="Decimal point">.</button>
+    </div>
+
+    <p class="hint">Keyboard: 0-9, + - * /, Enter, Backspace, Esc</p>
+  </main>
+
+  <footer class="foot"><p>Built by Mantu Yadav &middot; Veda Technology Internship</p></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
