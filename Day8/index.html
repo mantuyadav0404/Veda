@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Random quote generator that shows a new quote and author on every click.">
+  <title>Random Quote Generator | Mantu Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <p class="eyebrow">Veda Technology &middot; Task 8</p>
+    <h1>Random Quote Generator</h1>
+
+    <figure class="quote-box" aria-live="polite">
+      <span class="mark" aria-hidden="true">&ldquo;</span>
+      <blockquote id="quote" class="quote">Click the button to get your first quote.</blockquote>
+      <figcaption id="author" class="author"></figcaption>
+    </figure>
+
+    <div class="actions">
+      <button id="new-quote" class="btn primary" type="button">New Quote</button>
+      <button id="copy" class="btn secondary" type="button" disabled>Copy</button>
+      <button id="share" class="btn secondary" type="button" disabled>Share</button>
+    </div>
+
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+    <p id="count" class="count"></p>
+  </main>
+
+  <footer class="foot"><p>Built by Mantu Yadav &middot; Veda Technology Internship</p></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
