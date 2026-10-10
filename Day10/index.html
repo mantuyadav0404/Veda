@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Accessible FAQ accordion built with HTML, CSS and JavaScript.">
+  <title>FAQ Accordion | Mantu Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow">Veda Technology &middot; Task 10</p>
+      <h1>Frequently Asked Questions</h1>
+      <p class="intro">Web development basics in ten short answers. Select a question to expand or collapse it.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <div class="toolbar">
+      <label class="switch">
+        <input type="checkbox" id="multi">
+        <span class="track" aria-hidden="true"></span>
+        <span>Keep multiple answers open</span>
+      </label>
+      <div class="bulk">
+        <button type="button" id="expand-all" class="link-btn" disabled>Expand all</button>
+        <button type="button" id="collapse-all" class="link-btn">Collapse all</button>
+      </div>
+    </div>
+
+    <section aria-label="Frequently asked questions">
+      <ul class="faq-list" id="faq-list" role="list">
+        <li class="faq-item" id="faq-1">
+          <h3 class="faq-heading">
+            <button class="faq-question" type="button" id="q-1" aria-expanded="false" aria-controls="a-1">
+              <span class="q-text">What is HTML?</span>
+              <span class="icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer" id="a-1" role="region" aria-labelledby="q-1">
+            <div class="answer-inner"><p>HTML (HyperText Markup Language) is the standard language for structuring web pages. It uses elements such as headings, paragraphs, lists, links and images to describe the content of a page.</p></div>
+          </div>
+        </li>
+        <li class="faq-item" id="faq-2">
+          <h3 class="faq-heading">
+            <button class="faq-question" type="button" id="q-2" aria-expanded="false" aria-controls="a-2">
+              <span class="q-text">How are HTML, CSS and JavaScript different?</span>
+              <span class="icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer" id="a-2" role="region" aria-labelledby="q-2">
+            <div class="answer-inner"><p>HTML provides the structure and content, CSS controls the appearance (colours, spacing, layout), and JavaScript adds behaviour and interactivity. Together they form the core of front-end development.</p></div>
+          </div>
+        </li>
+        <li class="faq-item" id="faq-3">
+          <h3 class="faq-heading">
+            <button class="faq-question" type="button" id="q-3" aria-expanded="false" aria-controls="a-3">
+              <span class="q-text">What is semantic HTML and why use it?</span>
+              <span class="icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer" id="a-3" role="region" aria-labelledby="q-3">
+            <div class="answer-inner"><p>Semantic HTML uses elements that describe their meaning, such as header, nav, main, article and footer, instead of generic div elements. It improves accessibility, helps search engines understand the page and makes code easier to maintain.</p></div>
+          </div>
+        </li>
+        <li class="faq-item" id="faq-4">
+          <h3 class="faq-heading">
+            <button class="faq-question" type="button" id="q-4" aria-expanded="false" aria-controls="a-4">
+              <span class="q-text">What is the CSS box model?</span>
+              <span class="icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer" id="a-4" role="region" aria-labelledby="q-4">
+            <div class="answer-inner"><p>Every element is a rectangular box made of content, padding, border and margin. Understanding the box model is essential for controlling spacing and sizing; box-sizing: border-box makes widths include padding and border.</p></div>
+          </div>
+        </li>
+        <li class="faq-item" id="faq-5">
+          <h3 class="faq-heading">
+            <button class="faq-question" type="button" id="q-5" aria-expanded="false" aria-controls="a-5">
+              <span class="q-text">When should I use Flexbox instead of Grid?</span>
+              <span class="icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer" id="a-5" role="region" aria-labelledby="q-5">
+            <div class="answer-inner"><p>Use Flexbox for one-dimensional layouts, such as a row of buttons or a navigation bar. Use CSS Grid for two-dimensional layouts that control rows and columns together, such as a page layout or an image gallery.</p></div>
+          </div>
+        </li>
+        <li class="faq-item" id="faq-6">
+          <h3 class="faq-heading">
+            <button class="faq-question" type="button" id="q-6" aria-expanded="false" aria-controls="a-6">
+              <span class="q-text">What is the DOM?</span>
+              <span class="icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer" id="a-6" role="region" aria-labelledby="q-6">
+            <div class="answer-inner"><p>The Document Object Model is the browser's tree-like representation of an HTML page. JavaScript uses it to select elements, change their content, styles and classes, and respond to user events.</p></div>
+          </div>
+        </li>
+        <li class="faq-item" id="faq-7">
+          <h3 class="faq-heading">
+            <button class="faq-question" type="button" id="q-7" aria-expanded="false" aria-controls="a-7">
+              <span class="q-text">What is the difference between let, const and var?</span>
+              <span class="icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer" id="a-7" role="region" aria-labelledby="q-7">
+            <div class="answer-inner"><p>let and const are block-scoped, while var is function-scoped. Use const by default for values that are not reassigned and let for values that change; var is mostly avoided in modern code.</p></div>
+          </div>
+        </li>
+        <li class="faq-item" id="faq-8">
+          <h3 class="faq-heading">
+            <button class="faq-question" type="button" id="q-8" aria-expanded="false" aria-controls="a-8">
+              <span class="q-text">What does responsive design mean?</span>
+              <span class="icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer" id="a-8" role="region" aria-labelledby="q-8">
+            <div class="answer-inner"><p>A responsive website adapts its layout to the screen size, from phones to large monitors. It relies on flexible layouts, relative units, images that scale and CSS media queries.</p></div>
+          </div>
+        </li>
+        <li class="faq-item" id="faq-9">
+          <h3 class="faq-heading">
+            <button class="faq-question" type="button" id="q-9" aria-expanded="false" aria-controls="a-9">
+              <span class="q-text">What is Git and why should I use it?</span>
+              <span class="icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer" id="a-9" role="region" aria-labelledby="q-9">
+            <div class="answer-inner"><p>Git is a version control system that records the history of your code. It lets you undo mistakes, work on features in branches and collaborate with others, and GitHub hosts Git repositories online.</p></div>
+          </div>
+        </li>
+        <li class="faq-item" id="faq-10">
+          <h3 class="faq-heading">
+            <button class="faq-question" type="button" id="q-10" aria-expanded="false" aria-controls="a-10">
+              <span class="q-text">Why is accessibility important in web development?</span>
+              <span class="icon" aria-hidden="true"></span>
+            </button>
+          </h3>
+          <div class="faq-answer" id="a-10" role="region" aria-labelledby="q-10">
+            <div class="answer-inner"><p>Accessibility ensures that people with disabilities, including those using screen readers or keyboards only, can use a website. It also improves usability and search ranking for everyone, so use semantic elements, alt text, sufficient contrast and visible focus states.</p></div>
+          </div>
+        </li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="foot"><p>Built by Mantu Yadav &middot; Veda Technology Internship</p></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
