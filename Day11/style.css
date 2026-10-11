@@ -1,0 +1,114 @@
+/* ---------- Design tokens: one spacing scale keeps the card consistent ---------- */
+:root {
+  --bg: #eef2f6;
+  --paper: #ffffff;
+  --ink: #1b2430;
+  --muted: #5a6677;
+  --brand: #1f4e79;
+  --brand-dark: #153754;
+  --accent: #d98e04;
+  --tomato: #c8352b;
+  --tint: #f5f8fb;
+  --line: #dde3ea;
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --radius: 16px;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-head: "Sora", "Inter", system-ui, sans-serif;
+}
+
+/* Box model: width includes padding and border, so sizes are predictable */
+*, *::before, *::after { box-sizing: border-box; }
+
+body { margin: 0; background: var(--bg); color: var(--ink); font: 400 1rem/1.65 var(--font-body); }
+h1, h2 { font-family: var(--font-head); line-height: 1.2; margin: 0; }
+p { margin: 0; }
+ul, ol { margin: 0; padding: 0; }
+
+.page { padding: var(--space-4) var(--space-2); }
+
+/* ---------- Card container ---------- */
+.recipe-card {
+  max-width: 920px; margin-inline: auto;
+  overflow: hidden;
+  background: var(--paper);
+  border-radius: var(--radius);
+  box-shadow: 0 14px 40px rgba(23, 50, 77, 0.16);
+}
+
+/* ---------- Figure ---------- */
+.recipe-figure { position: relative; margin: 0; }
+.recipe-figure img { display: block; width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; }
+.recipe-figure figcaption {
+  position: absolute; inset: auto 0 0 0;
+  padding: var(--space-4) var(--space-3) var(--space-2);
+  color: #fff; font-size: 0.9rem;
+  background: linear-gradient(transparent, rgba(8, 18, 30, 0.7));
+}
+
+/* ---------- Header ---------- */
+.recipe-header { padding: var(--space-4) var(--space-4) var(--space-3); }
+.eyebrow { margin-bottom: var(--space-1); color: var(--accent); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; }
+.recipe-header h1 { font-size: clamp(1.7rem, 5vw, 2.4rem); color: var(--brand-dark); }
+.summary { margin-top: var(--space-2); max-width: 62ch; color: var(--muted); }
+
+.meta {
+  list-style: none; margin-top: var(--space-3);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--space-2);
+}
+.meta li { display: flex; flex-direction: column; padding: 0.75rem var(--space-2); background: var(--tint); border: 1px solid var(--line); border-radius: 12px; }
+.meta-label { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.meta-value { color: var(--brand-dark); font: 700 1.1rem var(--font-head); }
+
+/* ---------- Body: ingredients + steps ---------- */
+.recipe-body {
+  display: grid; grid-template-columns: 1fr 1.6fr; gap: var(--space-4);
+  padding: var(--space-3) var(--space-4) var(--space-4);
+  border-top: 1px solid var(--line);
+}
+.recipe-body h2 { margin-bottom: var(--space-2); padding-bottom: var(--space-1); font-size: 1.2rem; color: var(--brand); border-bottom: 3px solid var(--accent); display: inline-block; }
+
+/* Ingredients: unordered list with custom bullets */
+.ingredients ul { list-style: none; }
+.ingredients li { position: relative; padding: 0.55rem 0 0.55rem 1.5rem; border-bottom: 1px solid var(--line); }
+.ingredients li::before { content: ""; position: absolute; left: 0; top: 1.05rem; width: 8px; height: 8px; border-radius: 50%; background: var(--tomato); }
+
+/* Steps: ordered list with CSS counters */
+.steps ol { list-style: none; counter-reset: step; }
+.steps li { position: relative; padding: 0 0 var(--space-3) 3.25rem; counter-increment: step; }
+.steps li::before {
+  content: counter(step);
+  position: absolute; left: 0; top: -0.1rem;
+  display: grid; place-items: center; width: 2.25rem; height: 2.25rem;
+  color: #fff; font: 700 0.95rem var(--font-head);
+  background: var(--brand); border-radius: 50%;
+}
+/* connecting line between the numbers */
+.steps li:not(:last-child)::after { content: ""; position: absolute; left: calc(1.125rem - 1px); top: 2.35rem; bottom: 0.2rem; width: 2px; background: var(--line); }
+
+/* ---------- Tip + footer ---------- */
+.tip { margin: 0 var(--space-4) var(--space-4); padding: var(--space-2) var(--space-3); background: #fff7e6; border-left: 5px solid var(--accent); border-radius: 0 12px 12px 0; }
+.tip h2 { margin-bottom: 0.25rem; font-size: 1rem; color: #8a5a00; }
+.tip p { color: #5b4a22; }
+.recipe-footer { padding: var(--space-2); text-align: center; color: var(--muted); font-size: 0.85rem; background: var(--tint); border-top: 1px solid var(--line); }
+
+/* ---------- Responsive: the same card, rearranged ---------- */
+@media (max-width: 760px) {
+  .recipe-header { padding: var(--space-3) var(--space-3) var(--space-2); }
+  .recipe-body { grid-template-columns: 1fr; gap: var(--space-3); padding: var(--space-2) var(--space-3) var(--space-3); }
+  .meta { grid-template-columns: repeat(2, 1fr); }
+  .tip { margin: 0 var(--space-3) var(--space-3); }
+  .recipe-figure img { aspect-ratio: 4 / 3; }
+}
+@media (max-width: 420px) { .page { padding: 0; } .recipe-card { border-radius: 0; } }
+
+/* ---------- Print: just the recipe ---------- */
+@media print {
+  body { background: #fff; }
+  .page { padding: 0; }
+  .recipe-card { box-shadow: none; max-width: none; }
+  .recipe-figure figcaption { display: none; }
+  .recipe-body, .tip { break-inside: avoid; }
+}
