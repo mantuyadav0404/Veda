@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Responsive pricing table with three plans, feature lists and call-to-action buttons.">
+  <title>Pricing Table | Mantu Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow">Veda Technology &middot; Task 12</p>
+      <h1>Simple, transparent pricing</h1>
+      <p class="intro">Pick the hosting plan that fits your project. Upgrade or cancel at any time.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <section aria-label="Pricing plans">
+      <div class="plans">
+        <article class="plan" aria-labelledby="basic-name">
+          <header class="plan-header">
+            <h3 id="basic-name">Basic</h3>
+            <p class="plan-tag">For personal sites and learning</p>
+            <p class="price"><span class="currency">&#8377;</span><span class="amount">299</span><span class="period">/month</span></p>
+          </header>
+          <ul class="features">
+              <li class="yes"><span class="sr-only">Included: </span>1 website</li>
+              <li class="yes"><span class="sr-only">Included: </span>10 GB SSD storage</li>
+              <li class="yes"><span class="sr-only">Included: </span>100 GB monthly bandwidth</li>
+              <li class="yes"><span class="sr-only">Included: </span>Free SSL certificate</li>
+              <li class="yes"><span class="sr-only">Included: </span>Email support</li>
+              <li class="no"><span class="sr-only">Not included: </span>Daily backups</li>
+              <li class="no"><span class="sr-only">Not included: </span>Priority support</li>
+          </ul>
+          <a class="btn" href="#get-started" aria-label="Get Basic plan">Get Basic<span class="arrow" aria-hidden="true">&rarr;</span></a>
+        </article>
+
+        <article class="plan featured" aria-labelledby="pro-name">
+          <p class="badge">Most Popular</p>
+          <header class="plan-header">
+            <h3 id="pro-name">Pro</h3>
+            <p class="plan-tag">For growing businesses and portfolios</p>
+            <p class="price"><span class="currency">&#8377;</span><span class="amount">699</span><span class="period">/month</span></p>
+          </header>
+          <ul class="features">
+              <li class="yes"><span class="sr-only">Included: </span>10 websites</li>
+              <li class="yes"><span class="sr-only">Included: </span>100 GB SSD storage</li>
+              <li class="yes"><span class="sr-only">Included: </span>1 TB monthly bandwidth</li>
+              <li class="yes"><span class="sr-only">Included: </span>Free SSL certificate</li>
+              <li class="yes"><span class="sr-only">Included: </span>Daily backups</li>
+              <li class="yes"><span class="sr-only">Included: </span>Priority chat support</li>
+              <li class="no"><span class="sr-only">Not included: </span>Dedicated server</li>
+          </ul>
+          <a class="btn" href="#get-started" aria-label="Choose Pro plan">Choose Pro<span class="arrow" aria-hidden="true">&rarr;</span></a>
+        </article>
+
+        <article class="plan" aria-labelledby="enterprise-name">
+          <header class="plan-header">
+            <h3 id="enterprise-name">Enterprise</h3>
+            <p class="plan-tag">For teams with high traffic</p>
+            <p class="price"><span class="currency">&#8377;</span><span class="amount">1,499</span><span class="period">/month</span></p>
+          </header>
+          <ul class="features">
+              <li class="yes"><span class="sr-only">Included: </span>Unlimited websites</li>
+              <li class="yes"><span class="sr-only">Included: </span>500 GB SSD storage</li>
+              <li class="yes"><span class="sr-only">Included: </span>Unlimited bandwidth</li>
+              <li class="yes"><span class="sr-only">Included: </span>Free SSL certificate</li>
+              <li class="yes"><span class="sr-only">Included: </span>Hourly backups</li>
+              <li class="yes"><span class="sr-only">Included: </span>24/7 phone and chat support</li>
+              <li class="yes"><span class="sr-only">Included: </span>Dedicated server</li>
+          </ul>
+          <a class="btn" href="#get-started" aria-label="Contact Sales plan">Contact Sales<span class="arrow" aria-hidden="true">&rarr;</span></a>
+        </article>
+      </div>
+      <p class="note" id="get-started">All prices are in Indian rupees per month, excluding taxes. This page is a design exercise, so the buttons do not process payments.</p>
+    </section>
+  </main>
+
+  <footer class="foot"><p>Built by Mantu Yadav &middot; Veda Technology Internship</p></footer>
+</body>
+</html>
