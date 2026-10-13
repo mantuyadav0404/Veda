@@ -1,0 +1,81 @@
+:root {
+  --bg-1: #0f2238;
+  --bg-2: #17324d;
+  --paper: #ffffff;
+  --ink: #1b2430;
+  --muted: #5a6677;
+  --brand: #1f4e79;
+  --brand-dark: #153754;
+  --accent: #f0a91c;
+  --accent-dark: #d98e04;
+  --line: #d5dce5;
+  --danger: #b3261e;
+  --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Arial, sans-serif;
+  --font-head: "Sora", "Inter", system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+body {
+  margin: 0; min-height: 100vh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 1.25rem; padding: 1.5rem;
+  background: linear-gradient(160deg, var(--bg-1), var(--bg-2));
+  color: #f2f6fa; font: 400 1rem/1.6 var(--font-body);
+}
+[hidden] { display: none !important; }
+
+.card {
+  width: min(760px, 100%);
+  padding: clamp(1.5rem, 5vw, 3rem);
+  text-align: center;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 22px;
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4);
+  transition: box-shadow 0.4s, border-color 0.4s;
+}
+.eyebrow { margin: 0 0 0.6rem; color: var(--accent); font-size: 0.78rem; font-weight: 600; letter-spacing: 0.17em; text-transform: uppercase; }
+h1 { margin: 0; font: 700 clamp(1.7rem, 6vw, 2.5rem)/1.2 var(--font-head); }
+.target { margin: 0.5rem 0 2rem; color: #b4c8da; font-size: 0.95rem; }
+
+/* Timer tiles: Grid, four columns, two on small screens */
+.timer { display: grid; grid-template-columns: repeat(4, 1fr); gap: clamp(0.5rem, 2vw, 1rem); }
+.unit {
+  display: flex; flex-direction: column; align-items: center; gap: 0.35rem;
+  padding: clamp(0.9rem, 3vw, 1.5rem) 0.5rem;
+  background: rgba(8, 18, 30, 0.55);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+}
+.num { font: 700 clamp(2rem, 9vw, 3.6rem)/1 var(--font-head); font-variant-numeric: tabular-nums; }
+.label { color: #9db4c9; font-size: clamp(0.65rem, 2.2vw, 0.8rem); font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; }
+
+/* Message when the countdown ends */
+.message { margin: 1.75rem 0 0; padding: 1rem 1.25rem; font-weight: 600; font-size: 1.1rem; border-radius: 12px; }
+.card.done { border-color: var(--accent); box-shadow: 0 0 0 3px rgba(240, 169, 28, 0.25), 0 24px 60px rgba(0, 0, 0, 0.4); }
+.card.done .message { color: #1b2430; background: var(--accent); }
+.card.done .num { color: var(--accent); }
+.card.passed .message { color: #ffdcd8; background: rgba(179, 38, 30, 0.35); border: 1px solid rgba(255, 180, 171, 0.5); }
+
+/* Custom countdown form */
+.custom { margin-top: 2rem; text-align: left; border-top: 1px solid rgba(255, 255, 255, 0.15); padding-top: 1.25rem; }
+.custom summary { display: inline-block; color: #cfe0ef; font-weight: 600; cursor: pointer; }
+.custom summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.custom form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem; align-items: end; }
+.field label { display: block; margin-bottom: 0.3rem; color: #cfe0ef; font-size: 0.85rem; font-weight: 500; }
+.field input {
+  width: 100%; padding: 0.7rem 0.9rem; color: var(--ink); background: #fff;
+  font: 500 1rem var(--font-body); border: 1.5px solid var(--line); border-radius: 10px;
+}
+.field input:focus { outline: 3px solid var(--accent); outline-offset: 1px; }
+.form-error { grid-column: 1 / -1; min-height: 1.3rem; margin: 0; color: #ffb4ab; font-size: 0.88rem; font-weight: 500; }
+.btn { grid-column: 1 / -1; justify-self: start; padding: 0.75rem 1.6rem; color: #1b2430; font: 600 0.98rem var(--font-body); background: var(--accent); border: 0; border-radius: 10px; cursor: pointer; transition: background 0.2s; }
+.btn:hover { background: #ffc148; }
+.btn:focus-visible { outline: 3px solid #fff; outline-offset: 3px; }
+
+.foot p { margin: 0; color: #9db4c9; font-size: 0.85rem; text-align: center; }
+
+@media (max-width: 520px) {
+  .timer { grid-template-columns: repeat(2, 1fr); }
+  .custom form { grid-template-columns: 1fr; }
+}
+@media (prefers-reduced-motion: reduce) { .card, .btn { transition: none; } }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Countdown timer showing days, hours, minutes and seconds until a target date.">
+  <title>Countdown Timer | Mantu Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card" id="card">
+    <p class="eyebrow">Veda Technology &middot; Task 13</p>
+    <h1 id="event-name">Countdown</h1>
+    <p id="target-text" class="target"></p>
+
+    <div class="timer" role="timer" aria-label="Time remaining">
+      <div class="unit"><span id="days" class="num">00</span><span class="label">Days</span></div>
+      <div class="unit"><span id="hours" class="num">00</span><span class="label">Hours</span></div>
+      <div class="unit"><span id="minutes" class="num">00</span><span class="label">Minutes</span></div>
+      <div class="unit"><span id="seconds" class="num">00</span><span class="label">Seconds</span></div>
+    </div>
+
+    <p id="message" class="message" role="status" hidden></p>
+
+    <details class="custom">
+      <summary>Set a custom countdown</summary>
+      <form id="custom-form" novalidate>
+        <div class="field">
+          <label for="custom-name">Event name</label>
+          <input id="custom-name" type="text" maxlength="40" placeholder="e.g. Exam day" autocomplete="off">
+        </div>
+        <div class="field">
+          <label for="custom-date">Date and time</label>
+          <input id="custom-date" type="datetime-local">
+        </div>
+        <p id="form-error" class="form-error" role="alert"></p>
+        <button type="submit" class="btn">Start countdown</button>
+      </form>
+    </details>
+  </main>
+
+  <footer class="foot"><p>Built by Mantu Yadav &middot; Veda Technology Internship</p></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
