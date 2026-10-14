@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Generate random colour palettes and copy any hex code to the clipboard with one click.">
+  <title>Color Palette Generator | Mantu Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow">Veda Technology &middot; Task 14</p>
+      <h1>Color Palette Generator</h1>
+      <p class="intro">Generate a random palette, click any swatch to copy its hex code, and lock the colours you like.</p>
+    </div>
+  </header>
+
+  <main class="container">
+    <ul id="palette" class="palette" aria-label="Color palette"></ul>
+
+    <div class="actions">
+      <button id="generate" class="btn primary" type="button">Generate new palette</button>
+      <button id="copy-all" class="btn secondary" type="button">Copy all hex codes</button>
+    </div>
+    <p class="tip">Tip: press the <kbd>Space</kbd> bar to generate a new palette.</p>
+  </main>
+
+  <footer class="foot"><p>Built by Mantu Yadav &middot; Veda Technology Internship</p></footer>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
