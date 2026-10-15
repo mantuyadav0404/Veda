@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Unit Converter — Length &amp; Weight</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<main class="panel">
+
+  <header class="panel__header">
+    <p class="eyebrow">Unit Converter</p>
+    <h1>Length &amp; Weight</h1>
+    <p class="subtitle">Pick a category, choose your units, and start typing — the result updates live.</p>
+  </header>
+
+  <div class="tabs" role="tablist" aria-label="Conversion category">
+    <button class="tab is-active" id="tabLength" role="tab" aria-selected="true" data-category="length" type="button">Length</button>
+    <button class="tab" id="tabWeight" role="tab" aria-selected="false" data-category="weight" type="button">Weight</button>
+  </div>
+
+  <section class="converter">
+
+    <div class="field">
+      <label for="fromValue">From</label>
+      <div class="field__row">
+        <input type="number" id="fromValue" inputmode="decimal" value="1" aria-label="Value to convert">
+        <select id="fromUnit" aria-label="Unit to convert from"></select>
+      </div>
+    </div>
+
+    <button class="swap" id="swapBtn" type="button" aria-label="Swap units">
+      <svg viewBox="0 0 20 20" fill="none" aria-hidden="true">
+        <path d="M6 4v9.5M6 13.5 3 10.5M6 13.5 9 10.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M14 16V6.5M14 6.5 11 9.5M14 6.5 17 9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </button>
+
+    <div class="field">
+      <label for="toValue">To</label>
+      <div class="field__row">
+        <input type="text" id="toValue" readonly tabindex="-1" aria-label="Converted result">
+        <select id="toUnit" aria-label="Unit to convert to"></select>
+      </div>
+    </div>
+
+  </section>
+
+  <p class="equation" id="equation" aria-live="polite">1 meter = 3.2808 feet</p>
+
+  <footer class="panel__footer">
+    <p>Task 15 · Unit Converter · Web Development Track</p>
+  </footer>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>

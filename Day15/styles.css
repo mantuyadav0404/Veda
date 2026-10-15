@@ -1,0 +1,249 @@
+/* ==========================================================================
+   Unit Converter — Length & Weight
+   Task 15 · Web Development Track
+   ========================================================================== */
+
+:root {
+  --bg: #EEF2F4;
+  --surface: #FFFFFF;
+  --ink: #142029;
+  --muted: #647383;
+  --teal: #0F8B8D;
+  --teal-dim: rgba(15, 139, 141, 0.10);
+  --line: #DEE4E8;
+
+  --font-display: "Outfit", "Segoe UI", sans-serif;
+  --font-body: "Inter", "Segoe UI", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 32px 18px;
+  background: var(--bg);
+  font-family: var(--font-body);
+  color: var(--ink);
+}
+
+.panel {
+  width: 100%;
+  max-width: 560px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 44px 42px 34px;
+  box-shadow: 0 30px 60px -32px rgba(20, 32, 41, 0.22);
+}
+
+/* ---------- Header ---------- */
+
+.eyebrow {
+  margin: 0 0 8px;
+  font-size: 12.5px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--teal);
+  font-weight: 600;
+}
+
+.panel__header h1 {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin: 0 0 28px;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--muted);
+  max-width: 44ch;
+}
+
+/* ---------- Tabs ---------- */
+
+.tabs {
+  display: inline-flex;
+  padding: 4px;
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 9px;
+  margin-bottom: 28px;
+}
+
+.tab {
+  padding: 9px 20px;
+  border: none;
+  background: transparent;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--muted);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tab.is-active {
+  background: var(--surface);
+  color: var(--teal);
+  box-shadow: 0 2px 6px rgba(20, 32, 41, 0.08);
+}
+
+/* ---------- Converter ---------- */
+
+.converter {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: end;
+  gap: 14px;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field label {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field__row {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.field__row input,
+.field__row select {
+  width: 100%;
+  padding: 13px 14px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--surface);
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--ink);
+}
+
+.field__row input:focus,
+.field__row select:focus {
+  outline: none;
+  border-color: var(--teal);
+  box-shadow: 0 0 0 3px var(--teal-dim);
+}
+
+#fromValue {
+  font-weight: 600;
+}
+
+#toValue {
+  font-weight: 700;
+  color: var(--teal);
+  background: var(--teal-dim);
+  border-color: transparent;
+  cursor: default;
+}
+
+.field__row select {
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='none'%3E%3Cpath d='M5.5 8l4.5 4.5L14.5 8' stroke='%23647383' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  padding-right: 34px;
+}
+
+.swap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 1px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  border-radius: 50%;
+  color: var(--teal);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: transform 0.18s ease, background 0.15s ease;
+}
+
+.swap:hover {
+  background: var(--teal-dim);
+}
+
+.swap:active {
+  transform: rotate(180deg);
+}
+
+.swap svg {
+  width: 19px;
+  height: 19px;
+}
+
+.equation {
+  margin: 22px 0 0;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+  font-size: 13.5px;
+  color: var(--muted);
+}
+
+/* ---------- Footer ---------- */
+
+.panel__footer {
+  margin-top: 26px;
+  padding-top: 16px;
+  border-top: 1px solid var(--line);
+  text-align: center;
+}
+
+.panel__footer p {
+  margin: 0;
+  font-size: 11.5px;
+  letter-spacing: 0.02em;
+  color: var(--muted);
+}
+
+/* ---------- Responsive ---------- */
+
+@media (max-width: 540px) {
+  .panel {
+    padding: 34px 24px 26px;
+  }
+
+  .panel__header h1 {
+    font-size: 26px;
+  }
+
+  .converter {
+    grid-template-columns: 1fr;
+  }
+
+  .swap {
+    justify-self: center;
+    margin: -2px 0;
+    transform: rotate(90deg);
+  }
+
+  .swap:active {
+    transform: rotate(270deg);
+  }
+}
