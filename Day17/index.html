@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Random password generator with adjustable length, character types and a strength meter.">
+  <title>Password Generator | Mantu Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <header>
+      <p class="eyebrow">Veda Technology &middot; Task 17</p>
+      <h1>Password Generator</h1>
+      <p class="intro">Create a strong, random password. Everything happens in your browser, and nothing is sent or saved.</p>
+    </header>
+
+    <section class="display" aria-label="Generated password">
+      <div class="output-row">
+        <output id="password" class="password" for="length-range length-number" aria-live="off">Generating…</output>
+        <button id="copy" class="icon-btn copy" type="button">Copy</button>
+        <button id="refresh" class="icon-btn" type="button" aria-label="Generate a new password">&#8635;</button>
+      </div>
+
+      <div class="strength" aria-live="polite">
+        <div class="meter" aria-hidden="true">
+          <span class="seg"></span><span class="seg"></span><span class="seg"></span><span class="seg"></span>
+        </div>
+        <p class="strength-text"><strong id="strength-label">&nbsp;</strong> <span id="entropy"></span></p>
+      </div>
+    </section>
+
+    <form id="options" novalidate>
+      <div class="length-row">
+        <label for="length-number" class="group-label">Password length</label>
+        <input id="length-number" type="number" min="4" max="64" value="16" inputmode="numeric">
+      </div>
+      <input id="length-range" type="range" min="4" max="64" value="16" aria-label="Password length slider">
+      <div class="range-scale" aria-hidden="true"><span>4</span><span>64</span></div>
+
+      <fieldset class="types">
+        <legend class="group-label">Include characters</legend>
+        <div class="type-grid">
+        <label class="option"><input type="checkbox" id="opt-upper" checked><span class="box"></span><span class="text"><strong>Uppercase</strong><small>A B C</small></span></label>
+        <label class="option"><input type="checkbox" id="opt-lower" checked><span class="box"></span><span class="text"><strong>Lowercase</strong><small>a b c</small></span></label>
+        <label class="option"><input type="checkbox" id="opt-numbers" checked><span class="box"></span><span class="text"><strong>Numbers</strong><small>1 2 3</small></span></label>
+        <label class="option"><input type="checkbox" id="opt-symbols" checked><span class="box"></span><span class="text"><strong>Symbols</strong><small>! @ #</small></span></label>
+        </div>
+      </fieldset>
+
+      <label class="option inline"><input type="checkbox" id="opt-ambiguous"><span class="box"></span><span class="text"><strong>Avoid look-alike characters</strong><small>Leaves out I, l, 1, O, 0 and o</small></span></label>
+
+      <p id="error" class="error" role="alert"></p>
+      <button id="generate" class="generate" type="submit">Generate password</button>
+    </form>
+  </main>
+
+  <footer class="foot"><p>Built by Mantu Yadav &middot; Veda Technology Internship</p></footer>
+
+  <p id="status" class="sr-only" role="status" aria-live="polite"></p>
+  <script src="script.js"></script>
+</body>
+</html>
