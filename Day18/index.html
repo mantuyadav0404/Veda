@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Live character, word and sentence counter with reading time and an optional character limit.">
+  <title>Character and Word Counter | Mantu Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="page-header">
+    <div class="container">
+      <p class="eyebrow">Veda Technology &middot; Task 18</p>
+      <h1>Character and Word Counter</h1>
+      <p class="intro">Type or paste your text. The counts update with every keystroke, and nothing leaves your browser.</p>
+    </div>
+  </header>
+
+  <main class="container layout">
+    <section class="editor" aria-label="Text editor">
+      <label for="text" class="sr-only">Your text</label>
+      <textarea id="text" placeholder="Start typing or paste your text here…" spellcheck="true" autofocus></textarea>
+
+      <div class="toolbar">
+        <div class="limit">
+          <label for="limit">Character limit <span class="optional">(optional)</span></label>
+          <input id="limit" type="number" min="1" max="100000" step="1" inputmode="numeric" placeholder="e.g. 280">
+        </div>
+        <div class="buttons">
+          <button id="sample" class="btn ghost" type="button">Sample text</button>
+          <button id="clear" class="btn ghost" type="button">Clear</button>
+        </div>
+      </div>
+
+      <div id="limit-box" class="limit-box" hidden>
+        <div class="bar" aria-hidden="true"><span id="limit-fill"></span></div>
+        <p id="limit-text" class="limit-text"></p>
+      </div>
+    </section>
+
+    <aside class="stats" aria-label="Text statistics">
+      <dl class="primary">
+        <div class="stat"><dt>Characters</dt><dd id="chars">0</dd></div>
+        <div class="stat"><dt>Words</dt><dd id="words">0</dd></div>
+        <div class="stat"><dt>Sentences</dt><dd id="sentences">0</dd></div>
+      </dl>
+      <dl class="secondary">
+        <div class="stat small"><dt>Without spaces</dt><dd id="chars-nospace">0</dd></div>
+        <div class="stat small"><dt>Paragraphs</dt><dd id="paragraphs">0</dd></div>
+        <div class="stat small"><dt>Reading time</dt><dd id="reading">0 sec</dd></div>
+        <div class="stat small"><dt>Avg. word length</dt><dd id="avg">0</dd></div>
+      </dl>
+    </aside>
+  </main>
+
+  <footer class="foot"><p>Built by Mantu Yadav &middot; Veda Technology Internship</p></footer>
+
+  <p id="status" class="sr-only" role="status" aria-live="polite"></p>
+  <script src="script.js"></script>
+</body>
+</html>
