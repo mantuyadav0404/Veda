@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Interactive star rating widget with hover preview, keyboard support and a separate selected state.">
+  <title>Star Rating Widget | Mantu Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <header>
+      <p class="eyebrow">Veda Technology &middot; Task 19</p>
+      <h1>Rate your experience</h1>
+      <p class="intro">Hover over the stars to preview a rating, then click to choose it. You can also use the arrow keys.</p>
+    </header>
+
+    <!-- Each widget is built by script.js from these containers -->
+    <div class="rating" data-label="Overall experience"></div>
+    <div class="rating" data-label="Ease of use"></div>
+
+    <section class="summary" aria-labelledby="summary-h">
+      <h2 id="summary-h">Your ratings</h2>
+      <dl>
+        <div><dt>Overall experience</dt><dd id="sum-0">Not rated</dd></div>
+        <div><dt>Ease of use</dt><dd id="sum-1">Not rated</dd></div>
+        <div class="avg"><dt>Average</dt><dd id="sum-avg">&ndash;</dd></div>
+      </dl>
+    </section>
+
+    <noscript><p class="noscript">This widget needs JavaScript to work.</p></noscript>
+  </main>
+
+  <footer class="foot"><p>Built by Mantu Yadav &middot; Veda Technology Internship</p></footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
