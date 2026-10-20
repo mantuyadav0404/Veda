@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A polished newsletter signup modal demo built with HTML, CSS, and JavaScript." />
+  <title>Northstar — Newsletter Signup</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#" aria-label="Northstar home">
+      <span class="brand-mark" aria-hidden="true">N</span>
+      <span>northstar<span class="brand-dot">.</span></span>
+    </a>
+    <nav aria-label="Main navigation">
+      <a href="#benefits">Why subscribe</a>
+      <a href="#about">About</a>
+      <button class="nav-cta" id="openSignup" type="button">Join the newsletter <span aria-hidden="true">↗</span></button>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false" type="button">☰</button>
+  </header>
+
+  <main>
+    <section class="hero" id="about">
+      <div class="hero-copy">
+        <p class="eyebrow"><span class="eyebrow-line"></span> IDEAS WORTH YOUR INBOX</p>
+        <h1>Make room for<br><span>better ideas.</span></h1>
+        <p class="hero-description">A thoughtful weekly note on digital craft, useful tools, and the small ideas that move good work forward.</p>
+        <div class="hero-actions">
+          <button class="primary-btn" id="heroSignup" type="button">Get the weekly note <span aria-hidden="true">→</span></button>
+          <span class="microcopy">Free to join. Easy to leave.</span>
+        </div>
+        <div class="social-proof"><div class="avatar-stack" aria-hidden="true"><span>J</span><span>A</span><span>M</span><span>+</span></div><p><strong>2,400+</strong> curious people already reading</p></div>
+      </div>
+      <div class="hero-art" aria-label="Decorative newsletter illustration">
+        <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+        <div class="art-card card-back"><span class="mini-label">FIELD NOTES / 024</span><div class="back-lines"></div><div class="back-lines short"></div><div class="back-stamp">THINK<br>DEEPER</div></div>
+        <div class="art-card card-front"><div class="card-top"><span class="tiny-star">✳</span><span>THE NORTHSTAR NOTE</span><span>01 / 05</span></div><div class="art-title">Curiosity<br>is a practice.</div><div class="art-rule"></div><p>Ideas, tools & thoughtful work.</p><div class="art-footer"><span>ISSUE NO. 24</span><span>READ IN 4 MIN</span></div></div>
+        <span class="floating-dot dot-a"></span><span class="floating-dot dot-b"></span><span class="floating-star">✳</span>
+      </div>
+    </section>
+
+    <section class="benefits" id="benefits">
+      <div class="section-heading"><p class="eyebrow">A SMALL NOTE. A BIGGER PICTURE.</p><h2>Good things, delivered simply.</h2></div>
+      <div class="benefit-grid">
+        <article class="benefit"><span class="benefit-icon">✳</span><h3>Fresh perspective</h3><p>Ideas and observations to help you see familiar problems differently.</p></article>
+        <article class="benefit"><span class="benefit-icon">↗</span><h3>Useful resources</h3><p>Tools, links, and practical inspiration worth saving for later.</p></article>
+        <article class="benefit"><span class="benefit-icon">◷</span><h3>Respect for your time</h3><p>One considered email each week. No noise, no inbox overload.</p></article>
+      </div>
+    </section>
+    <section class="bottom-cta"><p class="eyebrow">YOUR NEXT GOOD IDEA STARTS HERE</p><h2>Let a little inspiration in.</h2><button class="primary-btn" id="bottomSignup" type="button">Sign me up <span aria-hidden="true">→</span></button></section>
+  </main>
+  <footer><a class="brand footer-brand" href="#"><span class="brand-mark">N</span><span>northstar<span class="brand-dot">.</span></span></a><p>Thoughtful notes for curious minds.</p><span>© <span id="year"></span> Northstar Studio</span></footer>
+
+  <div class="modal-overlay" id="modalOverlay" hidden>
+    <section class="signup-modal" id="signupModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-describedby="modalDescription" tabindex="-1">
+      <button class="modal-close" id="closeModal" type="button" aria-label="Close signup dialog">×</button>
+      <div class="modal-visual"><span class="visual-kicker">THE NORTHSTAR NOTE</span><div class="visual-symbol">✳</div><p>Good ideas<br>travel together.</p><span class="visual-bottom">A WEEKLY MOMENT OF CLARITY</span></div>
+      <div class="modal-content">
+        <p class="eyebrow">A NOTE FOR YOUR INBOX</p>
+        <h2 id="modalTitle">A little more<br> <span>inspiration.</span></h2>
+        <p class="modal-description" id="modalDescription">Join readers who like their ideas useful, their design thoughtful, and their inbox calm.</p>
+        <form id="signupForm" novalidate>
+          <label for="email">Email address</label>
+          <div class="input-wrap"><span aria-hidden="true">✉</span><input id="email" name="email" type="email" placeholder="you@example.com" autocomplete="email" required aria-describedby="emailError formMessage" /></div>
+          <p class="field-error" id="emailError" role="alert"></p>
+          <button class="primary-btn submit-btn" type="submit">Join the newsletter <span aria-hidden="true">→</span></button>
+          <p class="privacy-note">By subscribing, you agree to receive the Northstar Note. Unsubscribe anytime.</p>
+          <p class="form-message" id="formMessage" role="status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
