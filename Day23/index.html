@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Tip calculator: enter a bill, choose a tip and split it between people.">
+  <title>Tip Calculator | Mantu Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <section class="inputs" aria-labelledby="title">
+      <p class="eyebrow">Veda Technology &middot; Task 23</p>
+      <h1 id="title">Tip Calculator</h1>
+
+      <form id="calc" novalidate>
+        <div class="field">
+          <div class="label-row">
+            <label for="bill">Bill amount</label>
+            <select id="currency" aria-label="Currency">
+              <option value="INR" selected>INR &#8377;</option>
+              <option value="USD">USD $</option>
+              <option value="EUR">EUR &euro;</option>
+              <option value="GBP">GBP &pound;</option>
+            </select>
+          </div>
+          <div class="input-wrap"><span class="adorn" id="symbol" aria-hidden="true">&#8377;</span>
+            <input id="bill" type="text" inputmode="decimal" autocomplete="off" placeholder="0.00" aria-describedby="bill-error">
+          </div>
+          <p id="bill-error" class="error" role="alert"></p>
+        </div>
+
+        <fieldset class="field tips">
+          <legend>Select tip %</legend>
+          <div class="tip-grid" id="tip-grid">
+            <button type="button" class="tip" data-tip="5" aria-pressed="false">5%</button>
+            <button type="button" class="tip" data-tip="10" aria-pressed="false">10%</button>
+            <button type="button" class="tip" data-tip="15" aria-pressed="true">15%</button>
+            <button type="button" class="tip" data-tip="20" aria-pressed="false">20%</button>
+            <button type="button" class="tip" data-tip="25" aria-pressed="false">25%</button>
+            <div class="custom-wrap"><label for="custom" class="sr-only">Custom tip percentage</label>
+              <input id="custom" type="text" inputmode="decimal" autocomplete="off" placeholder="Custom" aria-describedby="tip-error"></div>
+          </div>
+          <p id="tip-error" class="error" role="alert"></p>
+        </fieldset>
+
+        <div class="field">
+          <label for="people">Number of people</label>
+          <div class="stepper">
+            <button type="button" id="minus" aria-label="Decrease number of people">&minus;</button>
+            <input id="people" type="text" inputmode="numeric" autocomplete="off" value="1" aria-describedby="people-error">
+            <button type="button" id="plus" aria-label="Increase number of people">+</button>
+          </div>
+          <p id="people-error" class="error" role="alert"></p>
+        </div>
+      </form>
+    </section>
+
+    <section class="results" aria-label="Results" aria-live="polite">
+      <div class="result-row"><div><p class="r-title">Tip amount</p><p class="r-sub">per person</p></div><p class="r-value" id="tip-pp">&ndash;</p></div>
+      <div class="result-row"><div><p class="r-title">Total</p><p class="r-sub">per person</p></div><p class="r-value" id="total-pp">&ndash;</p></div>
+      <p class="split-note" id="split-note"></p>
+
+      <dl class="breakdown">
+        <div><dt>Bill</dt><dd id="sum-bill">&ndash;</dd></div>
+        <div><dt>Total tip</dt><dd id="sum-tip">&ndash;</dd></div>
+        <div><dt>Grand total</dt><dd id="sum-total">&ndash;</dd></div>
+      </dl>
+      <button id="reset" class="reset" type="button">Reset</button>
+    </section>
+  </main>
+
+  <footer class="foot"><p>Built by Mantu Yadav &middot; Veda Technology Internship</p></footer>
+  <script src="script.js"></script>
+</body>
+</html>
