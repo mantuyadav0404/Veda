@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Number Guessing Game</title>
+  <meta name="description" content="Guess the secret number. Get higher or lower hints and try to win in as few attempts as possible." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="stage">
+    <header class="top">
+      <h1>Number Guessing Game</h1>
+      <label class="level">
+        <span>Difficulty</span>
+        <select id="difficulty">
+          <option value="easy">Easy (1 to 50)</option>
+          <option value="medium" selected>Medium (1 to 100)</option>
+          <option value="hard">Hard (1 to 500)</option>
+        </select>
+      </label>
+    </header>
+
+    <section class="board" aria-labelledby="prompt">
+      <p id="prompt" class="prompt">I’m thinking of a number between 1 and 100.</p>
+
+      <form id="guess-form" class="guess-form" novalidate>
+        <label for="guess" class="sr-only">Your guess</label>
+        <input id="guess" type="number" inputmode="numeric" autocomplete="off" placeholder="Your guess" />
+        <button id="guess-btn" class="btn btn-primary" type="submit">Guess</button>
+      </form>
+
+      <p id="feedback" class="feedback" role="status" aria-live="polite">Type a number and press Guess.</p>
+
+      <div class="meter" aria-hidden="true">
+        <div class="meter-fill" id="meter-fill"></div>
+      </div>
+      <p id="bounds" class="bounds"></p>
+
+      <dl class="stats">
+        <div><dt>Attempts</dt><dd id="attempts">0</dd></div>
+        <div><dt>Best on this level</dt><dd id="best">-</dd></div>
+      </dl>
+
+      <div class="history">
+        <h2>Your guesses</h2>
+        <ul id="history" class="chips"><li class="empty">None yet</li></ul>
+      </div>
+
+      <button id="play-again" class="btn btn-ghost" type="button">Play again</button>
+    </section>
+  </main>
+  <script src="script.js"></script>
+</body>
+</html>
