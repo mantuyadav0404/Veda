@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Signup form with inline validation, a password strength indicator and no submission until the form is valid.">
+  <title>Signup Form | Mantu Yadav</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="card">
+    <aside class="brand">
+      <p class="eyebrow">Veda Technology &middot; Task 26</p>
+      <h2>Join in under a minute</h2>
+      <ul>
+        <li>Instant feedback as you type</li>
+        <li>A password strength guide</li>
+        <li>Nothing is sent or stored</li>
+      </ul>
+    </aside>
+
+    <section class="panel">
+      <div id="form-view">
+        <h1>Create your account</h1>
+        <p class="sub">Fill in the three fields below.</p>
+
+        <form id="signup" novalidate>
+          <div class="field" data-field="name">
+            <label for="name">Full name</label>
+            <input id="name" name="name" type="text" autocomplete="name" placeholder="e.g. Mantu Yadav" aria-describedby="name-msg">
+            <p class="msg" id="name-msg" aria-live="polite"></p>
+          </div>
+
+          <div class="field" data-field="email">
+            <label for="email">Email address</label>
+            <input id="email" name="email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com" aria-describedby="email-msg">
+            <p class="msg" id="email-msg" aria-live="polite"></p>
+            <p class="suggest" id="email-suggest" hidden></p>
+          </div>
+
+          <div class="field" data-field="password">
+            <label for="password">Password</label>
+            <div class="pw-wrap">
+              <input id="password" name="password" type="password" autocomplete="new-password" placeholder="Create a password" aria-describedby="password-msg strength-text rules">
+              <button type="button" id="toggle-pw" class="toggle" aria-pressed="false" aria-label="Show password">Show</button>
+            </div>
+            <p class="msg" id="password-msg" aria-live="polite"></p>
+
+            <div class="strength">
+              <div class="meter" id="meter" data-level="0" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+              <p class="strength-text" id="strength-text" aria-live="polite">Password strength: <strong id="strength-label">&ndash;</strong></p>
+            </div>
+            <ul class="rules" id="rules" aria-label="Password requirements">
+              <li data-rule="length">At least 8 characters</li>
+              <li data-rule="lower">A lowercase letter</li>
+              <li data-rule="upper">An uppercase letter</li>
+              <li data-rule="number">A number</li>
+              <li data-rule="personal">Does not contain your name or email</li>
+            </ul>
+          </div>
+
+          <button type="submit" class="submit" id="submit" aria-disabled="true">Create account</button>
+          <p class="note" id="form-status" role="status" aria-live="polite">Demo only: your details are not sent or saved.</p>
+        </form>
+      </div>
+
+      <div id="success" class="success" hidden tabindex="-1">
+        <div class="tick" aria-hidden="true">&#10003;</div>
+        <h1>Account created</h1>
+        <p id="success-text"></p>
+        <p class="note">This is a demo. No data was sent or saved.</p>
+        <button type="button" class="submit" id="again">Start again</button>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot"><p>Built by Mantu Yadav &middot; Veda Technology Internship</p></footer>
+  <script src="script.js"></script>
+</body>
+</html>
