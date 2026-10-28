@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A polished, interactive flashcard study deck with flip animation and progress tracking." />
+  <title>Recall — Flashcard Study Deck</title>
+  <style>
+    :root {
+      --bg: #f4f7fb; --surface: #ffffff; --text: #172033; --muted: #68758b;
+      --primary: #4f46e5; --primary-dark: #3730a3; --accent: #f97316;
+      --border: #e3e9f3; --shadow: 0 20px 55px rgba(29, 45, 84, .10);
+      --success: #0f9f6e;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; color: var(--text);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: radial-gradient(circle at 10% 0%, #e9edff 0, transparent 30%),
+                  radial-gradient(circle at 100% 20%, #fff0e4 0, transparent 26%), var(--bg);
+    }
+    button { font: inherit; }
+    .app { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 28px 0 48px; }
+    header { display:flex; align-items:center; justify-content:space-between; gap:20px; margin-bottom:30px; }
+    .brand { display:flex; align-items:center; gap:12px; }
+    .logo { width:44px; height:44px; display:grid; place-items:center; color:white; font-weight:800; font-size:22px;
+      border-radius:14px; background:linear-gradient(135deg,var(--primary),#818cf8); box-shadow:0 8px 20px #4f46e544; }
+    .brand h1 { font-size:21px; margin:0; letter-spacing:-.5px; }
+    .brand p { margin:3px 0 0; font-size:12px; color:var(--muted); }
+    .header-actions { display:flex; gap:10px; align-items:center; }
+    .pill { border:1px solid var(--border); background:#ffffffc9; color:var(--muted); border-radius:999px; padding:9px 13px; font-size:12px; font-weight:700; }
+    .icon-btn, .secondary, .primary, .nav-btn { cursor:pointer; border:0; transition:transform .18s, background .18s, box-shadow .18s; }
+    button:hover { transform:translateY(-1px); }
+    button:focus-visible { outline:3px solid #a5b4fc; outline-offset:3px; }
+    .icon-btn { width:39px; height:39px; border:1px solid var(--border); background:white; border-radius:12px; color:var(--text); font-size:17px; }
+    .hero { display:grid; grid-template-columns:1.3fr .7fr; gap:18px; margin-bottom:22px; }
+    .welcome, .stat-card { border:1px solid #e5e9f4; border-radius:22px; background:#ffffffd9; box-shadow:0 8px 25px #23345a08; }
+    .welcome { padding:26px 28px; }
+    .eyebrow { color:var(--primary); font-size:11px; font-weight:800; text-transform:uppercase; letter-spacing:1.4px; }
+    h2 { font-size:clamp(25px,4vw,36px); letter-spacing:-1.2px; margin:9px 0 8px; }
+    .welcome p { color:var(--muted); margin:0; line-height:1.6; max-width:570px; }
+    .stats { display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+    .stat-card { padding:20px; display:flex; flex-direction:column; justify-content:center; }
+    .stat-label { color:var(--muted); font-size:12px; font-weight:700; }
+    .stat-value { font-size:27px; font-weight:800; margin:8px 0 3px; letter-spacing:-.8px; }
+    .stat-note { color:var(--success); font-size:11px; font-weight:700; }
+    .workspace { display:grid; grid-template-columns:minmax(0,1fr) 290px; gap:20px; align-items:start; }
+    .study-panel, .sidebar { border:1px solid var(--border); background:var(--surface); border-radius:22px; box-shadow:var(--shadow); }
+    .study-panel { padding:24px; }
+    .panel-top { display:flex; align-items:center; justify-content:space-between; gap:12px; margin-bottom:20px; }
+    .panel-top h3 { margin:0; font-size:16px; }
+    .deck-tag { color:var(--primary); background:#eef0ff; border-radius:8px; padding:7px 10px; font-size:11px; font-weight:800; }
+    .progress-row { display:flex; justify-content:space-between; color:var(--muted); font-size:12px; margin-bottom:9px; }
+    .progress-track { height:7px; background:#edf0f7; border-radius:99px; overflow:hidden; margin-bottom:25px; }
+    .progress-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--primary),#a78bfa); border-radius:99px; transition:width .3s ease; }
+    .card-stage { perspective:1200px; }
+    .flashcard { position:relative; min-height:315px; width:100%; transform-style:preserve-3d; transition:transform .65s cubic-bezier(.2,.75,.2,1); cursor:pointer; outline:none; }
+    .flashcard.flipped { transform:rotateY(180deg); }
+    .card-face { position:absolute; inset:0; min-height:315px; padding:32px; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center;
+      border:1px solid #e4e7f8; border-radius:20px; backface-visibility:hidden; -webkit-backface-visibility:hidden; }
+    .front { background:linear-gradient(145deg,#fafaff,#f0f2ff); }
+    .back { transform:rotateY(180deg); background:linear-gradient(145deg,#f0fdf8,#e6fbf3); border-color:#c8f0df; }
+    .face-label { color:var(--primary); font-size:10px; font-weight:900; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:18px; }
+    .back .face-label { color:var(--success); }
+    .card-face h4 { font-size:clamp(20px,3vw,27px); line-height:1.35; letter-spacing:-.5px; margin:0; max-width:570px; }
+    .card-face p { color:#475569; line-height:1.7; margin:14px 0 0; max-width:570px; }
+    .flip-hint { color:#8791a5; font-size:11px; margin-top:25px; }
+    .controls { display:flex; justify-content:center; align-items:center; gap:12px; margin-top:22px; }
+    .nav-btn { width:48px; height:46px; border-radius:14px; color:var(--text); background:#f5f6fb; border:1px solid var(--border); font-size:19px; }
+    .primary { background:var(--primary); color:white; border-radius:13px; padding:13px 22px; font-size:13px; font-weight:800; box-shadow:0 8px 18px #4f46e52b; }
+    .primary:hover { background:var(--primary-dark); }
+    .secondary { background:white; border:1px solid var(--border); color:var(--text); border-radius:12px; padding:10px 13px; font-size:12px; font-weight:750; }
+    .nav-btn:disabled { opacity:.35; cursor:not-allowed; transform:none; }
+    .keyboard-note { text-align:center; font-size:11px; color:#8993a7; margin:18px 0 0; }
+    .sidebar { padding:22px; }
+    .sidebar h3 { margin:0 0 5px; font-size:16px; }
+    .side-sub { color:var(--muted); font-size:12px; margin:0 0 18px; line-height:1.5; }
+    .deck-list { display:grid; gap:9px; }
+    .deck-item { width:100%; display:flex; align-items:center; gap:11px; padding:12px; text-align:left; border:1px solid transparent; background:#f8f9fd; border-radius:13px; cursor:pointer; color:var(--text); }
+    .deck-item.active { border-color:#c7ccff; background:#f0f1ff; }
+    .deck-icon { display:grid; place-items:center; width:36px; height:36px; border-radius:11px; background:white; font-size:17px; }
+    .deck-item strong { display:block; font-size:12px; margin-bottom:3px; }
+    .deck-item small { color:var(--muted); font-size:10px; }
+    .sidebar-divider { height:1px; background:var(--border); margin:21px 0; }
+    .session-heading { display:flex; justify-content:space-between; align-items:center; margin-bottom:12px; }
+    .session-heading h4 { margin:0; font-size:13px; }
+    .session-heading span { font-size:11px; color:var(--muted); }
+    .session-line { display:flex; justify-content:space-between; font-size:12px; margin:11px 0; color:var(--muted); }
+    .session-line strong { color:var(--text); }
+    .tip { padding:13px; background:#fff7ed; border:1px solid #ffead5; border-radius:13px; font-size:11px; color:#9a4d12; line-height:1.55; }
+    footer { text-align:center; color:#8b95a8; font-size:11px; padding-top:24px; }
+    .toast { position:fixed; bottom:22px; left:50%; transform:translate(-50%,20px); opacity:0; pointer-events:none; background:#172033; color:white; padding:12px 16px; border-radius:12px; font-size:12px; transition:.25s; box-shadow:var(--shadow); z-index:10; }
+    .toast.show { opacity:1; transform:translate(-50%,0); }
+    @media (max-width:800px) { .hero { grid-template-columns:1fr; } .workspace { grid-template-columns:1fr; } .stats { grid-template-columns:1fr 1fr; } .sidebar { order:2; } }
+    @media (max-width:520px) { .app { width:calc(100% - 20px); padding-top:18px; } header { align-items:flex-start; } .pill { display:none; } .welcome,.study-panel,.sidebar { padding:18px; border-radius:18px; } .card-face { padding:22px; } .flashcard,.card-face { min-height:300px; } .controls { gap:8px; } .primary { padding:12px 15px; } }
+    @media (prefers-reduced-motion:reduce) { *,*::before,*::after { transition:none !important; scroll-behavior:auto !important; } }
+  </style>
+</head>
+<body>
+  <main class="app">
+    <header>
+      <div class="brand">
+        <div class="logo" aria-hidden="true">R</div>
+        <div><h1>Recall<span style="color:var(--primary)">.</span></h1><p>Your focused learning space</p></div>
+      </div>
+      <div class="header-actions"><span class="pill">✦ DAILY LEARNING</span><button class="icon-btn" id="shuffleBtn" title="Shuffle cards" aria-label="Shuffle cards">⤨</button></div>
+    </header>
+
+    <section class="hero">
+      <div class="welcome">
+        <div class="eyebrow">Small sessions. Strong recall.</div>
+        <h2>Make knowledge<br> <span style="color:var(--primary)">stick.</span></h2>
+        <p>Practice active recall with a clean, distraction-free flashcard deck. Flip each card, check your answer, and keep your learning momentum going.</p>
+      </div>
+      <div class="stats">
+        <div class="stat-card"><span class="stat-label">Cards in this deck</span><div class="stat-value" id="totalStat">12</div><span class="stat-note">Ready to practice</span></div>
+        <div class="stat-card"><span class="stat-label">Cards reviewed</span><div class="stat-value" id="reviewedStat">0</div><span class="stat-note">Keep it up ✨</span></div>
+      </div>
+    </section>
+
+    <section class="workspace">
+      <div class="study-panel">
+        <div class="panel-top"><h3>Study session</h3><span class="deck-tag" id="deckTag">WEB DEVELOPMENT</span></div>
+        <div class="progress-row"><span id="progressLabel">Card 1 of 12</span><span id="progressPercent">0% reviewed</span></div>
+        <div class="progress-track" role="progressbar" aria-label="Deck review progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+
+        <div class="card-stage">
+          <div class="flashcard" id="flashcard" tabindex="0" role="button" aria-label="Flashcard. Press Enter or Space to flip.">
+            <div class="card-face front">
+              <div class="face-label">✦ Question</div><h4 id="questionText">What does HTML stand for?</h4>
+              <div class="flip-hint">Click the card to reveal the answer ↻</div>
+            </div>
+            <div class="card-face back">
+              <div class="face-label">✓ Answer</div><h4 id="answerTitle">HyperText Markup Language</h4>
+              <p id="answerDetail">HTML provides the structure and meaning of content on a web page.</p>
+              <div class="flip-hint">Click again to return to the question</div>
+            </div>
+          </div>
+        </div>
+        <div class="controls">
+          <button class="nav-btn" id="prevBtn" aria-label="Previous card" title="Previous card">←</button>
+          <button class="primary" id="flipBtn">Flip card <span aria-hidden="true">↻</span></button>
+          <button class="nav-btn" id="nextBtn" aria-label="Next card" title="Next card">→</button>
+        </div>
+        <p class="keyboard-note">Keyboard shortcuts: <b>Space</b> to flip · <b>← / →</b> to navigate</p>
+      </div>
+
+      <aside class="sidebar">
+        <h3>Your decks</h3><p class="side-sub">Choose a topic and build your knowledge one card at a time.</p>
+        <div class="deck-list">
+          <button class="deck-item active" data-deck="web"><span class="deck-icon">🌐</span><span><strong>Web Development</strong><small>12 cards · HTML, CSS & JS</small></span></button>
+          <button class="deck-item" data-deck="javascript"><span class="deck-icon">⚡</span><span><strong>JavaScript Basics</strong><small>10 cards · Core concepts</small></span></button>
+          <button class="deck-item" data-deck="git"><span class="deck-icon">⌘</span><span><strong>Git & GitHub</strong><small>8 cards · Version control</small></span></button>
+        </div>
+        <div class="sidebar-divider"></div>
+        <div class="session-heading"><h4>Session overview</h4><span>Live stats</span></div>
+        <div class="session-line"><span>Current position</span><strong id="positionStat">1 / 12</strong></div>
+        <div class="session-line"><span>Reviewed this session</span><strong id="sessionStat">0</strong></div>
+        <div class="session-line"><span>Deck completion</span><strong id="completionStat">0%</strong></div>
+        <div class="sidebar-divider"></div>
+        <div class="tip"><strong>💡 Study tip</strong><br>Try answering out loud before flipping the card. Retrieving an answer from memory helps reinforce learning.</div>
+      </aside>
+    </section>
+    <footer>Built with HTML, CSS & JavaScript · Task 28: Flashcard App (Static Deck)</footer>
+  </main>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script>
+    const decks = {
+      web: {
+        label: "WEB DEVELOPMENT",
+        cards: [
+          {q:"What does HTML stand for?", a:"HyperText Markup Language", d:"HTML provides the structure and meaning of content on a web page."},
+          {q:"What is CSS used for?", a:"Styling web pages", d:"CSS controls presentation, including colors, spacing, typography, layout and responsive behavior."},
+          {q:"What is JavaScript?", a:"A programming language for the web", d:"JavaScript adds behavior and interactivity, such as event handling, validation and dynamic updates."},
+          {q:"What is the DOM?", a:"Document Object Model", d:"The DOM represents a web document as a tree of objects that JavaScript can read and modify."},
+          {q:"What does responsive design mean?", a:"Layouts adapt to different screen sizes", d:"Responsive interfaces use flexible layouts, relative sizing and media queries to work across devices."},
+          {q:"What is a CSS class selector?", a:"A selector that targets elements with a class", d:"A class selector begins with a dot, for example .card, and can be reused on multiple elements."},
+          {q:"What is semantic HTML?", a:"HTML that describes the meaning of content", d:"Elements such as <main>, <nav>, <article> and <footer> improve structure and accessibility."},
+          {q:"What is an event listener?", a:"Code that responds to a specific event", d:"JavaScript addEventListener() can respond to events such as click, input, keydown or submit."},
+          {q:"What is Flexbox best suited for?", a:"One-dimensional layouts", d:"CSS Flexbox arranges items in a row or column and helps distribute space and align content."},
+          {q:"What does localStorage do?", a:"Stores key-value data in the browser", d:"Data in localStorage persists across page reloads until it is cleared or removed by code."},
+          {q:"What is an API?", a:"A defined way for software to communicate", d:"A web API lets an application request or exchange data with another service or component."},
+          {q:"Why use a media query?", a:"To apply CSS under specific conditions", d:"Media queries commonly adjust layout, typography or spacing based on viewport width or user preferences."}
+        ]
+      },
+      javascript: {
+        label: "JAVASCRIPT BASICS",
+        cards: [
+          {q:"What is a variable?",a:"A named place to hold a value",d:"JavaScript commonly uses const and let to declare variables."},
+          {q:"When should you use const?",a:"When the binding should not be reassigned",d:"A const object can still have its properties changed; const prevents reassignment of the variable binding."},
+          {q:"What is an array?",a:"An ordered collection of values",d:"Arrays use numeric indexes and provide methods such as map(), filter() and push()."},
+          {q:"What is an object?",a:"A collection of key-value properties",d:"Objects group related data and behavior under named properties."},
+          {q:"What does === check?",a:"Strict equality",d:"It compares values without performing type coercion."},
+          {q:"What is a function?",a:"A reusable block of code",d:"Functions can accept parameters, perform work and optionally return a value."},
+          {q:"What is an arrow function?",a:"A concise function expression using =>",d:"Arrow functions also handle this differently from traditional function expressions."},
+          {q:"What does map() return?",a:"A new array of transformed values",d:"The callback runs once for each element in the original array."},
+          {q:"What is JSON?",a:"JavaScript Object Notation",d:"JSON is a text format for exchanging structured data."},
+          {q:"What is async/await used for?",a:"Writing asynchronous code more clearly",d:"await pauses within an async function until a promise settles."}
+        ]
+      },
+      git: {
+        label: "GIT & GITHUB",
+        cards: [
+          {q:"What is Git?",a:"A distributed version control system",d:"Git records changes to files and supports branching and collaboration."},
+          {q:"What is GitHub?",a:"A platform for hosting Git repositories",d:"GitHub adds collaboration tools such as pull requests, issues and code review."},
+          {q:"What does git status show?",a:"The state of your working tree and staging area",d:"It reports changed, staged and untracked files."},
+          {q:"What does git add do?",a:"Stages changes for the next commit",d:"Use git add filename or git add . to stage selected changes."},
+          {q:"What does git commit do?",a:"Records staged changes as a snapshot",d:"A commit should include a clear message describing the change."},
+          {q:"What does git push do?",a:"Uploads local commits to a remote repository",d:"The remote branch is updated with commits from your local branch."},
+          {q:"What does git pull do?",a:"Fetches and integrates remote changes",d:"It typically combines git fetch with a merge or configured rebase."},
+          {q:"What is a branch?",a:"An independent line of development",d:"Branches let you work on a feature without changing the main line immediately."}
+        ]
+      }
+    };
+
+    let activeDeck = "web";
+    let cards = [...decks[activeDeck].cards];
+    let index = 0;
+    let flipped = false;
+    let reviewed = new Set();
+    let sessionReviewed = new Set();
+    const $ = id => document.getElementById(id);
+
+    function render() {
+      const card = cards[index];
+      $("questionText").textContent = card.q;
+      $("answerTitle").textContent = card.a;
+      $("answerDetail").textContent = card.d;
+      $("flashcard").classList.toggle("flipped", flipped);
+      $("flashcard").setAttribute("aria-label", (flipped ? "Answer: " + card.a : "Question: " + card.q) + ". Press Enter or Space to flip.");
+      $("deckTag").textContent = decks[activeDeck].label;
+      $("totalStat").textContent = cards.length;
+      $("reviewedStat").textContent = reviewed.size;
+      $("progressLabel").textContent = `Card ${index + 1} of ${cards.length}`;
+      const percent = Math.round(reviewed.size / cards.length * 100);
+      $("progressPercent").textContent = `${percent}% reviewed`;
+      $("progressFill").style.width = percent + "%";
+      $("progressBar").setAttribute("aria-valuenow", percent);
+      $("positionStat").textContent = `${index + 1} / ${cards.length}`;
+      $("sessionStat").textContent = sessionReviewed.size;
+      $("completionStat").textContent = percent + "%";
+      $("prevBtn").disabled = index === 0;
+      $("nextBtn").disabled = index === cards.length - 1;
+      $("flipBtn").innerHTML = flipped ? 'Show question <span aria-hidden="true">↻</span>' : 'Flip card <span aria-hidden="true">↻</span>';
+      document.querySelectorAll(".deck-item").forEach(btn => btn.classList.toggle("active", btn.dataset.deck === activeDeck));
+    }
+    function flipCard() {
+      flipped = !flipped;
+      if (flipped) {
+        reviewed.add(index);
+        sessionReviewed.add(index);
+      }
+      render();
+    }
+    function goTo(nextIndex) {
+      if (nextIndex < 0 || nextIndex >= cards.length) return;
+      index = nextIndex; flipped = false; render();
+    }
+    function showToast(message) {
+      $("toast").textContent = message;
+      $("toast").classList.add("show");
+      clearTimeout(showToast.timer);
+      showToast.timer = setTimeout(() => $("toast").classList.remove("show"), 2200);
+    }
+    function shuffleCards() {
+      for (let i = cards.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [cards[i], cards[j]] = [cards[j], cards[i]];
+      }
+      index = 0; flipped = false; reviewed.clear(); sessionReviewed.clear(); render();
+      showToast("Deck shuffled — ready for a fresh round!");
+    }
+    function switchDeck(deckKey) {
+      activeDeck = deckKey; cards = [...decks[deckKey].cards];
+      index = 0; flipped = false; reviewed = new Set(); sessionReviewed = new Set(); render();
+      showToast(`${decks[deckKey].label.replaceAll("_"," ")} deck selected`);
+    }
+    $("flashcard").addEventListener("click", flipCard);
+    $("flashcard").addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); flipCard(); }
+    });
+    $("flipBtn").addEventListener("click", flipCard);
+    $("prevBtn").addEventListener("click", () => goTo(index - 1));
+    $("nextBtn").addEventListener("click", () => goTo(index + 1));
+    $("shuffleBtn").addEventListener("click", shuffleCards);
+    document.querySelectorAll(".deck-item").forEach(btn => btn.addEventListener("click", () => switchDeck(btn.dataset.deck)));
+    document.addEventListener("keydown", e => {
+      if (e.target.matches("input,textarea,select")) return;
+      if (e.key === "ArrowLeft") goTo(index - 1);
+      if (e.key === "ArrowRight") goTo(index + 1);
+      if (e.key === " " && e.target !== $("flashcard")) { e.preventDefault(); flipCard(); }
+    });
+    render();
+  </script>
+</body>
+</html>
