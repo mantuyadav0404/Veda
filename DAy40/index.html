@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="A responsive expense tracker to record, categorize, filter and manage personal expenses." />
+  <title>SpendWise — Expense Tracker</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#" aria-label="SpendWise home">
+        <span class="brand-mark">S</span>
+        <span>Spend<span class="brand-light">Wise</span></span>
+      </a>
+      <div class="sidebar-label">WORKSPACE</div>
+      <nav class="side-nav" aria-label="Main navigation">
+        <a class="nav-link active" href="#overview"><span class="nav-icon">▦</span> Overview</a>
+        <a class="nav-link" href="#transactions"><span class="nav-icon">↕</span> Transactions</a>
+      </nav>
+      <div class="sidebar-bottom">
+        <div class="tip-card">
+          <div class="tip-icon">✦</div>
+          <strong>Small steps add up.</strong>
+          <p>Track every expense to build better money habits.</p>
+        </div>
+        <div class="profile">
+          <div class="avatar">SW</div>
+          <div><strong>Personal account</strong><small>Local workspace</small></div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">PERSONAL FINANCE</p>
+          <h1>Expense overview</h1>
+          <p class="muted">A clear picture of where your money goes.</p>
+        </div>
+        <button class="button button-primary" id="open-add-top">＋ Add expense</button>
+      </header>
+
+      <section class="summary-grid" id="overview" aria-label="Expense summary">
+        <article class="summary-card total-card">
+          <div class="summary-top"><span>Total expenses</span><span class="summary-icon purple">₹</span></div>
+          <div class="summary-value" id="total-expenses">₹0.00</div>
+          <div class="summary-note">Across all recorded transactions</div>
+        </article>
+        <article class="summary-card">
+          <div class="summary-top"><span>This month</span><span class="summary-icon blue">▣</span></div>
+          <div class="summary-value" id="month-expenses">₹0.00</div>
+          <div class="summary-note" id="month-label">Current month</div>
+        </article>
+        <article class="summary-card">
+          <div class="summary-top"><span>Transactions</span><span class="summary-icon green">↗</span></div>
+          <div class="summary-value" id="transaction-count">0</div>
+          <div class="summary-note">Expenses saved in this browser</div>
+        </article>
+      </section>
+
+      <section class="content-card" id="transactions">
+        <div class="section-heading">
+          <div>
+            <h2>Recent transactions</h2>
+            <p class="muted">Review, search and manage your spending.</p>
+          </div>
+          <button class="button button-outline" id="open-add-list">＋ New expense</button>
+        </div>
+
+        <div class="filters">
+          <label class="search-wrap">
+            <span aria-hidden="true">⌕</span>
+            <input type="search" id="search-input" placeholder="Search expenses..." aria-label="Search expenses" />
+          </label>
+          <select id="category-filter" aria-label="Filter by category">
+            <option value="all">All categories</option>
+            <option>Food</option><option>Transport</option><option>Shopping</option>
+            <option>Bills</option><option>Entertainment</option><option>Health</option>
+            <option>Education</option><option>Other</option>
+          </select>
+          <select id="date-filter" aria-label="Filter by date">
+            <option value="all">All dates</option>
+            <option value="month">This month</option>
+            <option value="week">Last 7 days</option>
+          </select>
+          <select id="sort-filter" aria-label="Sort expenses">
+            <option value="newest">Newest first</option>
+            <option value="oldest">Oldest first</option>
+            <option value="high">Amount: high to low</option>
+            <option value="low">Amount: low to high</option>
+          </select>
+        </div>
+
+        <div class="table-wrap">
+          <table>
+            <thead><tr><th>DESCRIPTION</th><th>CATEGORY</th><th>DATE</th><th>AMOUNT</th><th><span class="sr-only">Actions</span></th></tr></thead>
+            <tbody id="expense-list"></tbody>
+          </table>
+          <div class="empty-state" id="empty-state">
+            <div class="empty-icon">₹</div>
+            <h3>No expenses found</h3>
+            <p>Add your first expense or adjust your filters.</p>
+            <button class="button button-primary" id="empty-add">Add an expense</button>
+          </div>
+        </div>
+        <div class="table-footer"><span id="result-count">Showing 0 transactions</span><span>Saved automatically on this device</span></div>
+      </section>
+      <footer class="footer">SpendWise <span>•</span> Built with HTML, CSS & JavaScript</footer>
+    </main>
+  </div>
+
+  <dialog class="expense-dialog" id="expense-dialog">
+    <form id="expense-form" method="dialog">
+      <div class="dialog-heading">
+        <div><p class="eyebrow">TRANSACTION DETAILS</p><h2 id="dialog-title">Add expense</h2></div>
+        <button type="button" class="icon-button" id="close-dialog" aria-label="Close dialog">×</button>
+      </div>
+      <input type="hidden" id="expense-id" />
+      <label for="expense-title">Expense name</label>
+      <input id="expense-title" name="title" type="text" maxlength="60" placeholder="e.g. Lunch with friends" required />
+      <div class="form-row">
+        <div><label for="expense-amount">Amount (₹)</label><input id="expense-amount" name="amount" type="number" min="0.01" step="0.01" placeholder="250.00" required /></div>
+        <div><label for="expense-category">Category</label>
+          <select id="expense-category" name="category" required>
+            <option value="">Select category</option><option>Food</option><option>Transport</option>
+            <option>Shopping</option><option>Bills</option><option>Entertainment</option>
+            <option>Health</option><option>Education</option><option>Other</option>
+          </select>
+        </div>
+      </div>
+      <label for="expense-date">Date</label>
+      <input id="expense-date" name="date" type="date" required />
+      <div class="dialog-actions">
+        <button type="button" class="button button-outline" id="cancel-dialog">Cancel</button>
+        <button type="submit" class="button button-primary" id="save-expense">Save expense</button>
+      </div>
+      <p class="form-message" id="form-message" role="alert"></p>
+    </form>
+  </dialog>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  <script src="script.js"></script>
+</body>
+</html>
